@@ -6,41 +6,49 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "cars")
+@Table(name = "car")
 public class Car implements Serializable {
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_id", referencedColumnName = "id")
-    private User user;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "car_id")
-    private Long car_id;
-
-    public Long getId() {
-        return car_id;
-    }
-
-    public void setId(Long car_id) {
-        this.car_id = car_id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Column(name = "model")
-    String model;
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+    @Column (name = "model")
+    private String model;
     @Column(name = "series")
-    int series;
+    private int series;
+
+    public Car(String model, int series) {
+
+        this.model = model;
+        this.series = series;
+    }
 
     public Car() {
 
     }
+    public void setUser(User user){
+        this.user = user;
+    }
+    public User getUser() {
+        return user; }
+
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setSeries(int series) {
+        this.series = series;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getSeries() {
+        return series;
+    }
+
 
     @Override
     public String toString() {
@@ -51,24 +59,5 @@ public class Car implements Serializable {
                 '}';
     }
 
-    public String getModel() {
-        return model;
-    }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public int getSeries() {
-        return series;
-    }
-
-    public void setSeries(int series) {
-        this.series = series;
-    }
-
-    public Car(String model, int series) {
-        this.model = model;
-        this.series = series;
-    }
 }
